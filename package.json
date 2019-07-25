@@ -1,0 +1,34 @@
+{
+  "name": "pridefulpalettespicker",
+  "version": "1.0.0",
+  "description": "Smart Color Palette Picker for A.I. July!",
+  "main": "index.js",
+  "dependencies": {
+    "brain.js": "^1.6.1",
+    "comfydb": "^1.0.2",
+    "static-server": "^2.2.1",
+    "webwebweb": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instafluff/PridefulPalettesPicker.git"
+  },
+  "keywords": [
+    "color",
+    "palette",
+    "picker",
+    "pride",
+    "rainbow",
+    "choose"
+  ],
+  "author": "Instafluff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/instafluff/PridefulPalettesPicker/issues"
+  },
+  "homepage": "https://github.com/instafluff/PridefulPalettesPicker#readme"
+}

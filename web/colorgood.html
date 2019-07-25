@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <title>Amber Indigo the Color Expert!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="picker.css">
+    <script src="tinycolor.min.js"></script>
+    <script src="brain.js"></script>
+    <script src="prideful.js"></script>
+  </head>
+  <body>
+    <h1>Amber Indigo the Smart Color AI</h1>
+    <h3 id="prediction">N/A</h3>
+    <br/>
+    <div class="wrapper">
+      <div id="color0" class="box">1</div>
+      <div id="color1" class="box">2</div>
+      <button class="btn btn-success" onclick="paletteYes()">I Like It!</button>
+      <button class="btn btn-danger" onclick="paletteNo()">No Good.</button>
+    </div>
+    <script>
+      const net = new brain.NeuralNetwork();
+      var trainingData = [];
+
+      function generatePalette() {
+        var palette = [];
+        for( var i = 0; i < 2; i++ ) {
+          var colorHex = colorToHex( getRandomColor() );
+          palette.push( colorHex );
+        }
+        palette.sort( (a, b) => colorToHsl( a ).h - colorToHsl( b ).h );
+        return palette;
+      }
+
+      function showPalette( palette ) {
+        for( var i = 0; i < 2; i++ ) {
+          var colorHex = palette[ i ];
+          var element = document.querySelector( "#color" + i );
+          element.style.backgroundColor = colorHex;
+          element.style.color = colorReadable( colorHex );
+          element.innerText = colorHex;
+        }
+
+        // if( trainingData.length > 20 ) {
+          // var colorA = colorToHsl( prideful[ 0 ] );
+          // var colorB = colorToHsl( prideful[ 1 ] );
+          // var output = net.run( { a1: colorA.h / 360, a2: colorA.s, a3: colorA.l, b1: colorB.h / 360, b2: colorB.s, b3: colorB.l } );
+          var colorA = colorToRgb( prideful[ 0 ] );
+          var colorB = colorToRgb( prideful[ 1 ] );
+          var input = [ colorA.r / 255, colorA.g / 255, colorA.b / 255, colorB.r / 255, colorB.g / 255, colorB.b / 255 ];
+          var output = net.run( input );
+          console.log( output );
+          $("#prediction").text( JSON.stringify( output ) );
+        // }
+      }
+
+      function paletteYes() {
+        // var colorA = colorToHsl( prideful[ 0 ] );
+        // var colorB = colorToHsl( prideful[ 1 ] );
+        // console.log( colorA );
+        // console.log( colorB );
+        // console.log( {
+        //   input: { a1: colorA.h / 360, a2: colorA.s, a3: colorA.l, b1: colorB.h / 360, b2: colorB.s, b3: colorB.l },
+        //   output: { good: 1, nogood: 0 }
+        // } );
+        var colorA = colorToRgb( prideful[ 0 ] );
+        var colorB = colorToRgb( prideful[ 1 ] );
+        var input = [ colorA.r / 255, colorA.g / 255, colorA.b / 255, colorB.r / 255, colorB.g / 255, colorB.b / 255 ];
+        trainingData.push(
+          {
+            input: input,
+            output: { good: 1, nogood: 0 }
+          }
+        );
+        net.train( trainingData );
+
+        prideful = generatePalette();
+        showPalette( prideful );
+      }
+
+      function paletteNo() {
+        // var colorA = colorToHsl( prideful[ 0 ] );
+        // var colorB = colorToHsl( prideful[ 1 ] );
+        // console.log( colorA );
+        // console.log( colorB );
+        // console.log( {
+        //   input: { a1: colorA.h / 360, a2: colorA.s, a3: colorA.l, b1: colorB.h / 360, b2: colorB.s, b3: colorB.l },
+        //   output: { good: 0, nogood: 1 }
+        // } );
+
+        var colorA = colorToRgb( prideful[ 0 ] );
+        var colorB = colorToRgb( prideful[ 1 ] );
+        var input = [ colorA.r / 255, colorA.g / 255, colorA.b / 255, colorB.r / 255, colorB.g / 255, colorB.b / 255 ];
+        trainingData.push(
+          {
+            input: input,
+            output: { good: 0, nogood: 1 }
+          }
+        );
+        net.train( trainingData );
+
+        prideful = generatePalette();
+        showPalette( prideful );
+      }
+      //
+      // function paletteSave() {
+      //   // Save to the ComfyDB
+      //   var pQs = "palette=" + prideful.map( x => x.substr( 1 ) ).join( "," );
+      //   fetch( "/save?" + pQs, {
+      //     method: "POST",
+      //     body: JSON.stringify( {
+      //       test: "TEST DATA!"
+      //     })
+      //   })
+      //   .then( r => r.text() )
+      //   .then( r => console.log( r ) );
+      // }
+
+      var prideful = generatePalette();
+      showPalette( prideful );
+    </script>
+  </body>
+</html>

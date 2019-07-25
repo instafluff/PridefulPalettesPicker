@@ -1,2 +1,11 @@
 # PridefulPalettesPicker
 Smart Color Palette Picker for A.I. July!
+
+
+Thank you to everyone who helped make this smart color palette generator!
+
+**Gilokk0, Instafriend, Instafluff, ChatTranslator, Neo_TA, sethorizer, That_MS_Gamer, smilesandtea, LuRiMer313, BungalowGlow, DutchGamer46, CJnxd, LuckyFeathersGames, LilyHazel, simrose4u, MisterHex, illuminatedspace, lewdmelon, EnesOzdemirTV, MacABearMan, toonie_manyt, DevMerlin, MaryJoStaebler, Cyberninjagaminguk, UltraHal1, merkurrz, tesla_volt, OnkelJoeTV, darkmatterai, itsDeke, Alca, Dreadoosa, rotaidar, TheHugoDahl, WolvesGamingDen, Hisleo, phrakberg, NorthernAurora2018, caLLowCreation, celesrina, SIeepyMia, momokohyhy, BountyHunterLani, Dann_Bott, avavionmvm, sparky_pugwash, Stay_Hydrated_Bot, twallace123, pookiepew, Rivverdragon, jawibae, AlgerOnzin, sweetoxiin, Kushimitama, TheSandwichKitsune, ZANI0N, BEN_THE_CAT_GUY, HeapSpray, Succatash, KitAnnLIVE, darkblaze176, Chibigirl24, BaristaJosh, supremegoku5, Kyoslilmonster, neniltheelf, recursivechat, LizeLive, Thrennenne, donaldwm, levitance, roberttables, sorskoot, Nodebotanist, mightycore1, funky_swunk, shmuppyLove, Nordegraf, MooseTheMoocher, DiggityDeks, Nrwgn_VKNG, RokvirStormshield, Tekku, malfunct, koralina211, 0ffby0ne**
+
+Thank you to everyone who helped build Amber Indigo the Color Expert!
+
+**MacABearMan, Gilokk0, EnesOzdemirTV, ChatTranslator, Instafluff, Instafriend, sethorizer, SourBeers, simrose4u, DutchGamer46, ItsLittany, Ella_Fint, BaconBastrd, GretchenWeiners, smilesandtea, codephobia, violettepanda, sparky_pugwash, Vitiguess, HiccupingBoots, dragonhyperking, aj2017, RIKACHET, FuriousFur, Theoneandonlybigbadmo, TheHugoDahl, Korthrun, holloway87, LostHamster, ultristors, Psychosys82, BnAl78, DevMerlin, AccordingToBo, shakletonslip, GenericUsernameBro, Patchshifter, LilyHazel, lewdmelon, Monostache, xRolo768, ReklawCodes, losthewar, pookiepew, zivivi1, Kushimitama, julieee22, justthommie, primal_vertex, davidvkimball, Kyoslilmonster, Stay_Hydrated_Bot, Seeroro, jawibae, KitAnnLIVE, quickdeath, swolemaz, Stobie, TheReadPanda, Knots83Jr, eRIKSON135, JMSWRNR, QofLife, AmericanVikingJohn, kinglogannn, MangoMaestro, X8Y8Z8X, thosedamnflapjacks, nemessisc, Docpinecone, MisterHex**

@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>Prideful Palettes Picker!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="web/picker.css">
+    <script src="web/tinycolor.min.js"></script>
+    <script src="web/brain.js"></script>
+    <script src="web/prideful.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="color0" class="box">1</div>
+      <div id="color1" class="box">2</div>
+      <div id="color2" class="box">3</div>
+      <div id="color3" class="box">4</div>
+      <div id="color4" class="box">5</div>
+      <div id="color5" class="box">6</div>
+      <div id="color6" class="box">7</div>
+      <div id="color7" class="box">8</div>
+      <div id="color8" class="box">9</div>
+      <div id="color9" class="box">10</div>
+      <div id="color10" class="box">11</div>
+      <div id="color11" class="box">12</div>
+      <button class="btn btn-success" onclick="paletteYes()">I Like It!</button>
+      <button class="btn btn-danger" onclick="paletteNo()">No Good.</button>
+      <button class="btn btn-danger" onclick="paletteSave()">Save To DB!</button>
+    </div>
+    <script>
+      var mutationAmount = 0.5;
+
+      function generatePalette() {
+        var palette = [];
+        for( var i = 0; i < 12; i++ ) {
+          var colorHex = colorToHex( getRandomColor() );
+          palette.push( colorHex );
+        }
+        palette.sort( (a, b) => colorToHsl( a ).h - colorToHsl( b ).h );
+        return palette;
+      }
+
+      function mutatePalette( palette ) {
+        var mutatedPalette = [];
+        for( var i = 0; i < 12; i++ ) {
+          mutatedPalette.push( mutateColor( palette[ i ], mutationAmount ) );
+        }
+        palette.sort( (a, b) => colorToHsl( a ).h - colorToHsl( b ).h );
+        return mutatedPalette;
+      }
+
+      function showPalette( palette ) {
+        for( var i = 0; i < 12; i++ ) {
+          var colorHex = palette[ i ];
+          var element = document.querySelector( "#color" + i );
+          element.style.backgroundColor = colorHex;
+          element.style.color = colorReadable( colorHex );
+          element.innerText = colorHex;
+        }
+      }
+
+      function paletteYes() {
+        backupPride = prideful;
+        mutationAmount *= 0.90;
+        prideful = mutatePalette( prideful );
+        showPalette( prideful );
+      }
+
+      function paletteNo() {
+        mutationAmount *= 0.90;
+        prideful = mutatePalette( backupPride );
+        showPalette( prideful );
+      }
+
+      function paletteSave() {
+        // Save to the ComfyDB
+        var pQs = "palette=" + prideful.map( x => x.substr( 1 ) ).join( "," );
+        fetch( "/save?" + pQs, {
+          method: "POST",
+          body: JSON.stringify( {
+            test: "TEST DATA!"
+          })
+        })
+        .then( r => r.text() )
+        .then( r => console.log( r ) );
+      }
+
+      var prideful = generatePalette();
+      var backupPride = prideful.slice( 0 );
+      showPalette( prideful );
+    </script>
+  </body>
+</html>
